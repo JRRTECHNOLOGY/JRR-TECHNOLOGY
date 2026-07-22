@@ -12,7 +12,7 @@
   <style>
     /* Variables de Color Adaptadas a Fondo Blanco */
     :root {
-      --cyan-tech: #00b4c5; /* Variante saturada de #32e5f4 para contraste en blanco */
+      --cyan-tech: #00b4c5;
       --cyan-bright: #32e5f4;
       --blue-tech: #1b74af;
       --bg-white: #ffffff;
@@ -86,7 +86,6 @@
       padding: 0.8rem 2rem;
     }
 
-    /* Contenedor del Logo (Esquina Superior Izquierda) */
     .logo-container {
       display: flex;
       align-items: center;
@@ -233,99 +232,77 @@
       font-weight: 600;
     }
 
-    /* --- ESTILOS DE LA SECCIÓN CATÁLOGO --- */
-    .catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
-
-    .catalog-card {
+    /* --- SECCIÓN CATÁLOGO EN PDF --- */
+    .pdf-catalog-container {
       background: var(--bg-light);
-      border: 1px solid var(--border-color);
+      border: 1px dashed var(--blue-tech);
       border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+      padding: 2.5rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
     }
 
-    .catalog-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(27, 116, 175, 0.18);
-      border-color: var(--cyan-bright);
+    .upload-box {
+      margin-bottom: 1.5rem;
     }
 
-    .catalog-img-container {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      background: #e9f3f7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+    /* Ocultamos el input feo del navegador */
+    .file-input {
+      display: none;
     }
 
-    .catalog-img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
+    /* Botón personalizado de carga */
+    .file-label {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      background: var(--bg-white);
+      border: 2px solid var(--blue-tech);
+      color: var(--blue-tech);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .catalog-card:hover .catalog-img-container img {
-      transform: scale(1.05);
-    }
-
-    .catalog-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+    .file-label:hover {
       background: var(--blue-tech);
       color: #ffffff;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.7rem;
-      padding: 4px 10px;
-      border-radius: 4px;
-      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(27, 116, 175, 0.3);
+    }
+
+    .file-name {
+      margin-top: 0.8rem;
       font-weight: 700;
-    }
-
-    .catalog-info {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .catalog-info h3 {
-      font-size: 1.1rem;
-      color: var(--blue-tech);
-      margin-bottom: 0.5rem;
-    }
-
-    .catalog-info p {
-      color: #4a5568;
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      flex-grow: 1;
-    }
-
-    .catalog-price {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.2rem;
       color: var(--cyan-tech);
-      font-weight: 800;
-      margin-bottom: 1rem;
+      font-size: 1rem;
     }
 
-    .btn-catalog {
-      text-align: center;
-      padding: 0.6rem 1rem;
-      font-size: 0.85rem;
+    .pdf-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pdf-viewer-container {
+      margin-top: 2rem;
+      width: 100%;
+      height: 500px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      display: none; /* Se activa con JavaScript cuando haya un archivo */
+    }
+
+    .pdf-viewer-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
     /* Formulario de Contacto */
@@ -387,6 +364,7 @@
       .hero h1 { font-size: 2.2rem; }
       .hero p { font-size: 1.2rem; }
       nav ul { display: none; }
+      .pdf-viewer-container { height: 350px; }
     }
   </style>
 </head>
@@ -403,7 +381,7 @@
       <ul>
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#catalogo">Catálogo PDF</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
@@ -439,67 +417,31 @@
     </div>
   </section>
 
-  <!-- NUEVA SECCIÓN: Catálogo -->
+  <!-- SECCIÓN: Cargar y Visualizar Catálogo PDF -->
   <section id="catalogo">
-    <h2>Catálogo de Productos & Repuestos</h2>
-    <div class="catalog-grid">
+    <h2>Catálogo Oficial</h2>
+    <div class="pdf-catalog-container">
+      <p style="margin-bottom: 1.5rem; color: #4a5568; font-weight: 600;">
+        Sube o consulta el archivo PDF interactivo de productos y servicios de JRR Technology.
+      </p>
 
-      <!-- Producto 1 -->
-      <div class="catalog-card">
-        <div class="catalog-img-container">
-          <span class="catalog-badge">Tecnología</span>
-          <img src="https://via.placeholder.com/400x300/f4f8fa/1b74af?text=Pantalla+OLED" alt="Pantalla de Repuesto">
-        </div>
-        <div class="catalog-info">
-          <h3>Módulos de Pantalla OLED</h3>
-          <p>Repuestos de alta definición para smartphones de alta gama con calibración de color garantizada.</p>
-          <div class="catalog-price">Consultar Precio</div>
-          <a href="#contacto" class="btn-tech btn-catalog">Consultar Disponibilidad</a>
-        </div>
+      <!-- Control para Cargar el Archivo -->
+      <div class="upload-box">
+        <input type="file" id="pdfInput" class="file-input" accept="application/pdf" onchange="handlePDFUpload(event)">
+        <label for="pdfInput" class="file-label">📂 Seleccionar Catálogo PDF</label>
+        <div id="fileNameDisplay" class="file-name">Ningún archivo PDF cargado aún</div>
       </div>
 
-      <!-- Producto 2 -->
-      <div class="catalog-card">
-        <div class="catalog-img-container">
-          <span class="catalog-badge">Relojería</span>
-          <img src="https://via.placeholder.com/400x300/f4f8fa/1b74af?text=Correa+de+Titanio" alt="Correa para Reloj">
-        </div>
-        <div class="catalog-info">
-          <h3>Correas de Titanio / Cuero</h3>
-          <p>Accesorios de alta resistencia y acabados de lujo diseñados para relojes automáticos y de precisión.</p>
-          <div class="catalog-price">Consultar Precio</div>
-          <a href="#contacto" class="btn-tech btn-catalog">Solicitar Detalle</a>
-        </div>
+      <!-- Botones de Acción -->
+      <div class="pdf-actions">
+        <button id="btnView" class="btn-tech" style="display: none;" onclick="togglePDFViewer()">👁️ Previsualizar PDF</button>
+        <a id="btnDownload" class="btn-tech" style="display: none;" download="Catalogo_JRR_Technology.pdf">📥 Descargar PDF</a>
       </div>
 
-      <!-- Producto 3 -->
-      <div class="catalog-card">
-        <div class="catalog-img-container">
-          <span class="catalog-badge">Joyería</span>
-          <img src="https://via.placeholder.com/400x300/f4f8fa/1b74af?text=Anillo+Personalizado" alt="Joyas Personalizadas">
-        </div>
-        <div class="catalog-info">
-          <h3>Piezas & Anillos Personalizados</h3>
-          <p>Diseño y fabricación personalizada de piezas de joyería en metales finos con acabados de alta calidad.</p>
-          <div class="catalog-price">A Medida</div>
-          <a href="#contacto" class="btn-tech btn-catalog">Cotizar Diseño</a>
-        </div>
+      <!-- Visor del PDF -->
+      <div id="pdfViewerContainer" class="pdf-viewer-container">
+        <iframe id="pdfFrame" src=""></iframe>
       </div>
-
-      <!-- Producto 4 -->
-      <div class="catalog-card">
-        <div class="catalog-img-container">
-          <span class="catalog-badge">Mantenimiento</span>
-          <img src="https://via.placeholder.com/400x300/f4f8fa/1b74af?text=Kit+Mantenimiento" alt="Kit Mantenimiento">
-        </div>
-        <div class="catalog-info">
-          <h3>Kit Limpieza Ultrasónica</h3>
-          <p>Insumos y soluciones especializadas para la conservación y brillo de joyas y mecanismos de relojes.</p>
-          <div class="catalog-price">Consultar Precio</div>
-          <a href="#contacto" class="btn-tech btn-catalog">Pedir Información</a>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -516,8 +458,8 @@
         <input type="email" id="email" placeholder="correo@ejemplo.com" required>
       </div>
       <div class="form-group">
-        <label for="service">Servicio o Producto Requerido</label>
-        <input type="text" id="service" placeholder="Ej: Cotizar Anillo / Pantalla OLED / Reparación">
+        <label for="service">Servicio Requerido</label>
+        <input type="text" id="service" placeholder="Ej: Reparación de Reloj / Mantenimiento Técnico">
       </div>
       <div class="form-group">
         <label for="message">Detalles del Requerimiento</label>
@@ -531,6 +473,50 @@
   <footer>
     <p>&copy; 2026 JRR Technology. Todos los derechos reservados.</p>
   </footer>
+
+  <!-- Script para Procesar el PDF -->
+  <script>
+    let currentPDFUrl = null;
+
+    function handlePDFUpload(event) {
+      const file = event.target.files[0];
+      
+      if (file && file.type === "application/pdf") {
+        // Liberar memoria de la URL previa si existía
+        if (currentPDFUrl) {
+          URL.revokeObjectURL(currentPDFUrl);
+        }
+
+        currentPDFUrl = URL.createObjectURL(file);
+        
+        // Actualizar el nombre del archivo en pantalla
+        document.getElementById('fileNameDisplay').textContent = "📄 " + file.name;
+        
+        // Habilitar los botones de acción
+        const btnView = document.getElementById('btnView');
+        const btnDownload = document.getElementById('btnDownload');
+        const pdfFrame = document.getElementById('pdfFrame');
+
+        pdfFrame.src = currentPDFUrl;
+        btnDownload.href = currentPDFUrl;
+        btnDownload.download = file.name;
+
+        btnView.style.display = 'inline-block';
+        btnDownload.style.display = 'inline-block';
+      } else {
+        alert("Por favor, seleccione un archivo con formato PDF válido.");
+      }
+    }
+
+    function togglePDFViewer() {
+      const viewer = document.getElementById('pdfViewerContainer');
+      if (viewer.style.display === 'block') {
+        viewer.style.display = 'none';
+      } else {
+        viewer.style.display = 'block';
+      }
+    }
+  </script>
 
 </body>
 </html>
