@@ -2,575 +2,91 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JRR Technology - Servicio Técnico Especializado</title>
-  <!-- Fuentes de Google Fonts para un estilo cibernético/tecnológico -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    /* VARIABLES Y ESTILOS GLOBALES */
-    :root {
-      --bg-dark: #070d18;
-      --card-bg: rgba(12, 23, 42, 0.75);
-      --card-border: rgba(0, 212, 255, 0.2);
-      --cyan-primary: #00d4ff;
-      --cyan-bright: #38ef7d;
-      --cyan-glow: rgba(0, 212, 255, 0.4);
-      --text-main: #ffffff;
-      --text-muted: #8a99ad;
-      --font-title: 'Orbitron', sans-serif;
-      --font-body: 'Rajdhani', sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* FONDO DE LÍNEAS / MALA TECNOLÓGICA */
-    .bg-grid {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: 
-        radial-gradient(circle at 80% 50%, rgba(0, 180, 216, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 40%);
-      z-index: -1;
-    }
-
-    /* HEADER / NAVBAR */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 5%;
-      max-width: 1400px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-title);
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .logo-icon {
-      width: 28px;
-      height: 28px;
-      background: linear-gradient(135deg, var(--cyan-primary), #0077b6);
-      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      transition: color 0.3s ease;
-      text-transform: uppercase;
-    }
-
-    .nav-links a:hover {
-      color: var(--cyan-primary);
-    }
-
-    .btn-whatsapp {
-      background: linear-gradient(90deg, #00d4ff, #0099cc);
-      color: #040914;
-      font-family: var(--font-title);
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      letter-spacing: 1px;
-      box-shadow: 0 0 15px var(--cyan-glow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-whatsapp:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
-    }
-
-    /* SECCIÓN HERO principal */
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 3rem 5% 5rem 5%;
-      flex: 1;
-      width: 100%;
-      position: relative;
-    }
-
-    .hero-content {
-      max-width: 580px;
-    }
-
-    .subtitle-badge {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--cyan-primary);
-      font-family: var(--font-title);
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      margin-bottom: 1.5rem;
-    }
-
-    .subtitle-line {
-      width: 30px;
-      height: 2px;
-      background-color: var(--cyan-primary);
-    }
-
-    .hero-title {
-      font-family: var(--font-title);
-      font-size: 3.5rem;
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: 2px;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-
-    .hero-title span {
-      display: block;
-    }
-
-    .description {
-      color: var(--text-muted);
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
-      font-weight: 500;
-    }
-
-    .description span.highlight {
-      color: var(--cyan-primary);
-      font-weight: 600;
-    }
-
-    /* BOTONES ACCIÓN */
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, #00d4ff, #0088cc);
-      color: #040914;
-      font-family: var(--font-title);
-      font-size: 0.85rem;
-      font-weight: 800;
-      padding: 0.9rem 1.8rem;
-      border-radius: 6px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      letter-spacing: 1px;
-      box-shadow: 0 0 20px var(--cyan-glow);
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: #ffffff;
-      font-family: var(--font-title);
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 0.9rem 1.8rem;
-      border-radius: 6px;
-      text-decoration: none;
-      letter-spacing: 1px;
-      border: 1px solid rgba(0, 212, 255, 0.4);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--cyan-primary);
-      background: rgba(0, 212, 255, 0.1);
-      box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-    }
-
-    /* CARACTERÍSTICAS / INCLUYE */
-    .features-list {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #d0d7de;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .feature-icon {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1px solid var(--cyan-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--cyan-primary);
-      font-size: 0.75rem;
-    }
-
-    /* PANEL DERECHO - CARDS INTERACTIVAS */
-    .hero-display {
-      position: relative;
-      width: 500px;
-      height: 420px;
-    }
-
-    /* Órbitas / Círculos de fondo */
-    .tech-circle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 420px;
-      height: 420px;
-      border: 1px dashed rgba(0, 212, 255, 0.2);
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    .tech-circle-inner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 260px;
-      height: 260px;
-      border: 1px solid rgba(0, 212, 255, 0.1);
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    /* Estilo de Tarjetas */
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(12px);
-      border-radius: 12px;
-      padding: 1.5rem;
-      position: absolute;
-      z-index: 2;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    }
-
-    /* Tarjeta Principal (Express) */
-    .card-main {
-      top: 10px;
-      right: 20px;
-      width: 280px;
-      text-align: center;
-    }
-
-    .card-icon-box {
-      width: 50px;
-      height: 50px;
-      background: rgba(0, 212, 255, 0.08);
-      border: 1px solid rgba(0, 212, 255, 0.3);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem auto;
-      color: var(--cyan-primary);
-    }
-
-    .card-tag {
-      font-family: var(--font-title);
-      font-size: 0.65rem;
-      color: var(--cyan-primary);
-      letter-spacing: 2px;
-      margin-bottom: 0.3rem;
-      display: block;
-    }
-
-    .card-main h3 {
-      font-family: var(--font-title);
-      font-size: 1.25rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .card-tags-row {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 0.8rem;
-    }
-
-    .card-tags-row span {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* Tarjeta Secundaria 1 (Joyería) */
-    .card-sub1 {
-      bottom: 90px;
-      left: 10px;
-      width: 140px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .card-sub1 .icon-small {
-      color: var(--cyan-primary);
-      margin-bottom: 8px;
-    }
-
-    .card-sub1 h4 {
-      font-family: var(--font-title);
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-    }
-
-    .card-sub1 p {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* Tarjeta Secundaria 2 (Relojería) */
-    .card-sub2 {
-      bottom: 20px;
-      right: 70px;
-      width: 140px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .card-sub2 .icon-small {
-      color: var(--cyan-primary);
-      margin-bottom: 8px;
-    }
-
-    .card-sub2 h4 {
-      font-family: var(--font-title);
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-    }
-
-    .card-sub2 p {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* RESPONSIVE / ADAPTABILIDAD */
-    @media (max-width: 992px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-        gap: 3rem;
-      }
-      .hero-content {
-        max-width: 100%;
-      }
-      .subtitle-badge {
-        justify-content: center;
-      }
-      .cta-group {
-        justify-content: center;
-      }
-      .features-list {
-        justify-content: center;
-      }
-      .nav-links {
-        display: none; /* Oculto en móviles para simplicidad */
-      }
-    }
-
-    @media (max-width: 576px) {
-      .hero-title {
-        font-size: 2.5rem;
-      }
-      .hero-display {
-        width: 100%;
-        transform: scale(0.85);
-      }
-    }
-  </style>
 </head>
 <body>
 
-  <!-- Fondo dinámico con resplandor -->
-  <div class="bg-grid"></div>
-
-  <!-- Barra de navegación -->
+  <!-- ENCABEZADO Y NAVEGACIÓN -->
   <header>
-    <div class="logo">
-      <div class="logo-icon"></div>
-      JRR Technology
-    </div>
+    <h2>JRR Technology</h2>
     <nav>
-      <ul class="nav-links">
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#proceso">Proceso</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+      <ul>
+        <li><a href="#servicios">SERVICIOS</a></li>
+        <li><a href="#nosotros">NOSOTROS</a></li>
+        <li><a href="#proceso">PROCESO</a></li>
+        <li><a href="#testimonios">TESTIMONIOS</a></li>
+        <li><a href="#contacto">CONTACTO</a></li>
+        <li><a href="https://wa.me/"><b>WHATSAPP</b></a></li>
       </ul>
-      <a href="https://wa.me/" class="btn-whatsapp" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
-        </svg>
-        WHATSAPP
-      </a>
     </nav>
   </header>
 
-  <!-- Sección Hero -->
-  <section class="hero">
-    
-    <!-- Lado Izquierdo: Textos y CTAs -->
-    <div class="hero-content">
-      <div class="subtitle-badge">
-        <div class="subtitle-line"></div>
-        SERVICIO TÉCNICO ESPECIALIZADO
-      </div>
+  <hr>
 
-      <h1 class="hero-title">
-        <span>JRR</span>
-        <span>TECHNOLOGY</span>
-      </h1>
+  <!-- SECCIÓN PRINCIPAL (HERO) -->
+  <main>
+    <section>
+      <p><small>--- SERVICIO TÉCNICO ESPECIALIZADO ---</small></p>
+      
+      <h1>JRR TECHNOLOGY</h1>
 
-      <p class="description">
-        Expertos en reparación de <span class="highlight">celulares</span>, restauración de <span class="highlight">joyas</span> y servicio técnico de <span class="highlight">relojes</span>. Precisión, tecnología y elegancia en cada trabajo.
+      <p>
+        Expertos en reparación de <b>celulares</b>, restauración de <b>joyas</b> y servicio técnico de <b>relojes</b>. 
+        Precisión, tecnología y elegancia en cada trabajo.
       </p>
 
-      <div class="cta-group">
-        <a href="#servicios" class="btn-primary">
-          VER SERVICIOS &rarr;
-        </a>
-        <a href="#cotizar" class="btn-secondary">
-          COTIZAR AHORA
-        </a>
-      </div>
+      <!-- BOTONES DE ACCIÓN ENLACES -->
+      <p>
+        <a href="#servicios"><button>VER SERVICIOS &rarr;</button></a>
+        <a href="#cotizar"><button>COTIZAR AHORA</button></a>
+      </p>
 
-      <div class="features-list">
-        <div class="feature-item">
-          <span class="feature-icon">&#10003;</span>
-          Garantía 90 días
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">&#10003;</span>
-          Diagnóstico gratis
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">&#10003;</span>
-          Presupuesto sin costo
-        </div>
-      </div>
-    </div>
+      <!-- PUNTOS DESTACADOS -->
+      <ul>
+        <li><b>✓</b> Garantía 90 días</li>
+        <li><b>✓</b> Diagnóstico gratis</li>
+        <li><b>✓</b> Presupuesto sin costo</li>
+      </ul>
+    </section>
 
-    <!-- Lado Derecho: Tarjetas flotantes / Gráfico -->
-    <div class="hero-display">
-      <div class="tech-circle"></div>
-      <div class="tech-circle-inner"></div>
+    <hr>
 
-      <!-- Tarjeta Principal Express -->
-      <div class="card card-main">
-        <div class="card-icon-box">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="12" y1="18" x2="12.01" y2="18"></line>
-          </svg>
-        </div>
-        <span class="card-tag">DIAGNÓSTICO</span>
-        <h3>Reparación Express</h3>
-        <div class="card-tags-row">
-          <span>Pantallas</span>
-          <span>Batería</span>
-          <span>Software</span>
-        </div>
-      </div>
+    <!-- TARJETAS Y CATEGORÍAS (ESTRUCTURADAS CON TABLAS Y BORDES HTML) -->
+    <section>
+      <h3>SERVICIOS DESTACADOS</h3>
 
-      <!-- Tarjeta Secundaria Joyería -->
-      <div class="card card-sub1">
-        <div class="icon-small">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-          </svg>
-        </div>
-        <h4>Joyería</h4>
-        <p>Pulido & Soldar</p>
-      </div>
+      <table border="1" cellpadding="10">
+        <tr>
+          <!-- Tarjeta Principal -->
+          <td colspan="2" align="center">
+            <p><small>DIAGNÓSTICO</small></p>
+            <h3>Reparación Express</h3>
+            <p>Pantallas | Batería | Software</p>
+          </td>
+        </tr>
+        <tr>
+          <!-- Tarjeta Joyería -->
+          <td align="center">
+            <h4>Joyería</h4>
+            <p>Pulido & Soldar</p>
+          </td>
+          <!-- Tarjeta Relojería -->
+          <td align="center">
+            <h4>Relojería</h4>
+            <p>Calibración</p>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </main>
 
-      <!-- Tarjeta Secundaria Relojería -->
-      <div class="card card-sub2">
-        <div class="icon-small">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-        </div>
-        <h4>Relojería</h4>
-        <p>Calibración</p>
-      </div>
-    </div>
+  <hr>
 
-  </section>
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p><small>&copy; JRR Technology - Todos los derechos reservados.</small></p>
+  </footer>
 
 </body>
+</html>
 </html>
