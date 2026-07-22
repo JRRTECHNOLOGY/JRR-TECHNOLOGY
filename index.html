@@ -2,89 +2,382 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>JRR Technology - Servicio Técnico Especializado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JRR Technology - Servicio Técnico, Joyería y Relojería</title>
+  <!-- Fuentes Tecnológicas (Orbitron y Rajdhani) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Variables de Color Adaptadas a Fondo Blanco */
+    :root {
+      --cyan-tech: #00b4c5; /* Variante saturada de #32e5f4 para contraste en blanco */
+      --cyan-bright: #32e5f4;
+      --blue-tech: #1b74af;
+      --bg-white: #ffffff;
+      --bg-light: #f4f8fa;
+      --text-dark: #121820;
+      --border-color: rgba(27, 116, 175, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-white);
+      color: var(--text-dark);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Tipografías y Títulos */
+    h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    h1 {
+      color: var(--blue-tech);
+      text-shadow: 0 0 10px rgba(50, 229, 244, 0.3);
+    }
+
+    h2 {
+      color: var(--blue-tech);
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan-bright), var(--blue-tech));
+      margin: 10px auto 0;
+    }
+
+    /* Header y Navegación */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 2px solid var(--border-color);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 2rem;
+    }
+
+    /* Contenedor del Logo (Esquina Superior Izquierda) */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    /* Ajuste de la Imagen del Logo */
+    .logo-container img {
+      max-height: 48px; /* Ajusta este valor según la altura deseada para tu logo */
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Texto fallback si no hay imagen cargada */
+    .brand-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--blue-tech);
+    }
+
+    .brand-text span {
+      color: var(--cyan-tech);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--blue-tech);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--cyan-tech);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+      background: radial-gradient(circle at center, rgba(50, 229, 244, 0.12) 0%, rgba(255, 255, 255, 1) 75%);
+      border-bottom: 1px solid var(--border-color);
+      margin-top: 60px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: var(--blue-tech);
+    }
+
+    .hero p {
+      color: var(--cyan-tech);
+      font-size: 1.5rem;
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+      font-weight: 700;
+    }
+
+    /* Botón Tecnológico */
+    .btn-tech {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      color: var(--blue-tech);
+      border: 2px solid var(--cyan-bright);
+      background: var(--bg-white);
+      font-family: 'Orbitron', sans-serif;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(50, 229, 244, 0.25);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-tech:hover {
+      background: linear-gradient(135deg, var(--cyan-bright), var(--blue-tech));
+      color: #ffffff;
+      border-color: var(--blue-tech);
+      box-shadow: 0 6px 20px rgba(27, 116, 175, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Secciones Generales */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Tarjetas de Servicios */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem 2rem;
+      border-radius: 6px;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan-bright), var(--blue-tech));
+      border-radius: 6px 6px 0 0;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(27, 116, 175, 0.15);
+      border-color: var(--cyan-bright);
+    }
+
+    .card h3 {
+      color: var(--blue-tech);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: #4a5568;
+      font-weight: 600;
+    }
+
+    /* Formulario de Contacto */
+    .contact-form {
+      max-width: 650px;
+      margin: 0 auto;
+      background: var(--bg-light);
+      padding: 2.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      color: var(--blue-tech);
+      margin-bottom: 0.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--bg-white);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-dark);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      border-radius: 4px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--cyan-tech);
+      box-shadow: 0 0 10px rgba(50, 229, 244, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-light);
+      color: var(--blue-tech);
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1.2rem; }
+      nav ul { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ENCABEZADO Y NAVEGACIÓN -->
+  <!-- Header con Logo en la esquina izquierda -->
   <header>
-    <h2>JRR Technology</h2>
     <nav>
+      <a href="#" class="logo-container">
+        <!-- 
+          REEMPLAZA la URL dentro del atributo 'src' con la ubicación de tu archivo de logo. 
+          Ejemplo: src="logo.png" o src="imagenes/logo.svg"
+        -->
+        <img src="https://via.placeholder.com/180x50/ffffff/1b74af?text=JRR+LOGOS" alt="Logo JRR Technology" onerror="this.style.display='none'">
+        
+        <!-- Nombre comercial que aparece junto o en caso de no cargar la imagen -->
+        <span class="brand-text">JRR <span>TECHNOLOGY</span></span>
+      </a>
+
       <ul>
-        <li><a href="#servicios">SERVICIOS</a></li>
-        <li><a href="#nosotros">NOSOTROS</a></li>
-        <li><a href="#proceso">PROCESO</a></li>
-        <li><a href="#testimonios">TESTIMONIOS</a></li>
-        <li><a href="#contacto">CONTACTO</a></li>
-        <li><a href="https://wa.me/"><b>WHATSAPP</b></a></li>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
-  <hr>
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <h1>JRR TECHNOLOGY</h1>
+    <p>Ingeniería de Precisión • Servicio Técnico • Joyería & Relojería Avanzada</p>
+    <a href="#contacto" class="btn-tech">Solicitar Diagnóstico</a>
+  </section>
 
-  <!-- SECCIÓN PRINCIPAL (HERO) -->
-  <main>
-    <section>
-      <p><small>--- SERVICIO TÉCNICO ESPECIALIZADO ---</small></p>
+  <!-- Servicios -->
+  <section id="servicios">
+    <h2>Nuestros Servicios</h2>
+    <div class="services-grid">
       
-      <h1>JRR TECHNOLOGY</h1>
+      <div class="card">
+        <h3>Servicio Técnico Especializado</h3>
+        <p>Mantenimiento preventivo, reparación de microelectrónica, diagnóstico digital y restauración de dispositivos de alta tecnología.</p>
+      </div>
 
-      <p>
-        Expertos en reparación de <b>celulares</b>, restauración de <b>joyas</b> y servicio técnico de <b>relojes</b>. 
-        Precisión, tecnología y elegancia en cada trabajo.
-      </p>
+      <div class="card">
+        <h3>Alta Relojería</h3>
+        <p>Reparación, calibración de precisión y mantenimiento para relojes de lujo, automáticos y de alta gama.</p>
+      </div>
 
-      <!-- BOTONES DE ACCIÓN ENLACES -->
-      <p>
-        <a href="#servicios"><button>VER SERVICIOS &rarr;</button></a>
-        <a href="#cotizar"><button>COTIZAR AHORA</button></a>
-      </p>
+      <div class="card">
+        <h3>Joyería & Diseño</h3>
+        <p>Reparación de piezas de valor, pulido ultrasónico, engaste de gemas y restauración con tecnología de precisión.</p>
+      </div>
 
-      <!-- PUNTOS DESTACADOS -->
-      <ul>
-        <li><b>✓</b> Garantía 90 días</li>
-        <li><b>✓</b> Diagnóstico gratis</li>
-        <li><b>✓</b> Presupuesto sin costo</li>
-      </ul>
-    </section>
+    </div>
+  </section>
 
-    <hr>
+  <!-- Contacto -->
+  <section id="contacto">
+    <h2>Centro de Contacto</h2>
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('Mensaje enviado con éxito');">
+      <div class="form-group">
+        <label for="name">Nombre / Empresa</label>
+        <input type="text" id="name" placeholder="Ingrese su nombre completo" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" placeholder="correo@ejemplo.com" required>
+      </div>
+      <div class="form-group">
+        <label for="service">Servicio Requerido</label>
+        <input type="text" id="service" placeholder="Ej: Reparación de Reloj / Mantenimiento Técnico">
+      </div>
+      <div class="form-group">
+        <label for="message">Detalles del Requerimiento</label>
+        <textarea id="message" rows="4" placeholder="Escriba su mensaje aquí..."></textarea>
+      </div>
+      <button type="submit" class="btn-tech" style="width: 100%;">Enviar Mensaje</button>
+    </form>
+  </section>
 
-    <!-- TARJETAS Y CATEGORÍAS (ESTRUCTURADAS CON TABLAS Y BORDES HTML) -->
-    <section>
-      <h3>SERVICIOS DESTACADOS</h3>
-
-      <table border="1" cellpadding="10">
-        <tr>
-          <!-- Tarjeta Principal -->
-          <td colspan="2" align="center">
-            <p><small>DIAGNÓSTICO</small></p>
-            <h3>Reparación Express</h3>
-            <p>Pantallas | Batería | Software</p>
-          </td>
-        </tr>
-        <tr>
-          <!-- Tarjeta Joyería -->
-          <td align="center">
-            <h4>Joyería</h4>
-            <p>Pulido & Soldar</p>
-          </td>
-          <!-- Tarjeta Relojería -->
-          <td align="center">
-            <h4>Relojería</h4>
-            <p>Calibración</p>
-          </td>
-        </tr>
-      </table>
-    </section>
-  </main>
-
-  <hr>
-
-  <!-- PIE DE PÁGINA -->
+  <!-- Footer -->
   <footer>
-    <p><small>&copy; JRR Technology - Todos los derechos reservados.</small></p>
+    <p>&copy; 2026 JRR Technology. Todos los derechos reservados.</p>
   </footer>
 
 </body>
